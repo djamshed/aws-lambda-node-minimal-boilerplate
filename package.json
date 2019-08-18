@@ -1,0 +1,14 @@
+{
+  "name": "aws-lambda-node-minimal-boilerplate",
+  "version": "1.0.0",
+  "description": "Minimal boilerplate for node.js app intended to run on AWS Lambda",
+  "main": "index.js",
+  "author": "Djam Saidmuradov",
+  "license": "MIT",
+  "scripts": {
+    "compile": "rm -rf dist/* && cp src/index.js dist",
+    "build": "yarn compile && yarn install --production --modules-folder dist/node_modules && (cd dist && zip -r lambda.zip .)",
+    "publish-lambda": "aws lambda update-function-code --function-name my-lambda --zip-file fileb://dist/lambda.zip",
+    "build-publish": "yarn build && yarn publish-lambda"
+  }
+}
