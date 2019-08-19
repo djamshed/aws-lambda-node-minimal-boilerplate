@@ -20,15 +20,19 @@ Here is what `scripts` look like:
 
 Let's go thru these lines:
 
+
 `"compile": "rm -rf dist/* && cp src/index.js dist"`
+
 Copies source to dist. If you are using Babel, replace this script with Babel build command (make sure it outputs to `dist` folder).
 
 
 
 `"build": "yarn run compile && yarn install --production --modules-folder dist/node_modules && (cd dist && zip -r lambda.zip .)"`
+
 Creates `lambda.zip` file that you can upload thru AWS console or AWS cli. Script compiles files (through `yarn run compile`), installs only production dependencies (thru `yarn install --production`) and compresses everything in dist folder into `lambda.zip` file.
 
 
 
 `"publish-lambda": "aws lambda update-function-code --function-name MY_LAMBDA_NAME_HERE --zip-file fileb://dist/lambda.zip"`
+
 Updates AWS lambda function with contents of `lambda.zip`. Replace `MY_LAMBDA_NAME_HERE` with the "real" AWS lambda function name. This script relies on AWS cli tool.
